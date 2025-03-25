@@ -1,0 +1,21 @@
+# Entornos virtuales
+venv/
+.venv/
+
+# Archivos de configuración sensible
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de bases de datos locales
+*.db
+
+# Logs y archivos generados
+*.log
+
+# Volúmenes de Docker (si se generan localmente)
+postgres_data/

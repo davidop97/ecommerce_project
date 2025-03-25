@@ -1,0 +1,13 @@
+# requirements.txt (dependencias de ejecución)
+fastapi==0.115.0  # Última versión estable al 25/03/2025
+uvicorn==0.31.0   # Última versión compatible
+sqlalchemy==2.0.35
+psycopg[binary]==3.2.6
+pydantic==2.9.2   # Pydantic 2.x para compatibilidad con FastAPI
+python-decouple==3.8
+mypy==1.11.2
+alembic==1.13.3  
+python-jose[cryptography]==3.3.0  # Para JWT
+passlib[bcrypt]==1.7.4  # Para hash de contraseñas
+python-multipart==0.0.10
+bcrypt==4.0.1 

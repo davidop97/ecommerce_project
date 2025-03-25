@@ -1,0 +1,43 @@
+version: '3.8'  # Versión del formato de Docker Compose (no de Python)
+
+services:
+  backend:  # Servicio para el backend
+    build:  # Construye la imagen a partir de un Dockerfile
+      context: ..  # Carpeta raíz del proyecto (ecommerce_project/)
+      dockerfile: docker/Dockerfile.backend  # Ruta al Dockerfile del backend
+    ports:
+      - "8000:8000"  # Mapea el puerto 8000 del host al 8000 del contenedor
+    environment:  # Variables de entorno para el backend
+      - DB_USER=postgres
+      - DB_PASSWORD=miusuario123
+      - DB_HOST=db  # Nombre del servicio de la base de datos
+      - DB_PORT=5432
+      - DB_NAME=ecommerce_db
+      - SECRET_KEY=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+    depends_on:
+      - db  # Asegura que la base de datos esté lista antes de iniciar el backend
+
+  frontend:  # Servicio para el frontend
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "8001:8001"  # Mapea el puerto 8001 para el frontend
+    environment:
+      - BASE_URL=http://backend:8000  # URL interna para conectar al backend
+    depends_on:
+      - backend  # Asegura que el backend esté listo
+
+  db:  # Servicio para PostgreSQL
+    image: postgres:16  # Usa la imagen oficial de PostgreSQL
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=miusuario123
+      - POSTGRES_DB=ecommerce_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persiste los datos
+
+volumes:
+  postgres_data:  # Define un volumen para los datos de la base

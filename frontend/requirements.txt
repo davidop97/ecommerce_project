@@ -1,0 +1,4 @@
+# frontend/requirements.txt
+flet==0.24.1  # Última versión estable al 25/03/2025
+requests==2.32.3  # Para consumir la API
+mypy==1.11.2
